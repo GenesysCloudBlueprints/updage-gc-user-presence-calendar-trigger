@@ -1,0 +1,61 @@
+{
+  "name": "Get User Presence Id - Exported 2025-09-30 @ 16:39",
+  "integrationType": "purecloud-data-actions",
+  "actionType": "custom",
+  "config": {
+    "request": {
+      "requestUrlTemplate": "/api/v2/users/${input.USER_ID}/presences/PURECLOUD",
+      "requestType": "GET",
+      "headers": {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "UserAgent": "PureCloudIntegrations/1.0"
+      },
+      "requestTemplate": "${input.rawRequest}"
+    },
+    "response": {
+      "translationMap": {
+        "presenceId": "$.presenceDefinition.id"
+      },
+      "translationMapDefaults": {},
+      "successTemplate": "{\n   \"presenceId\": ${presenceId}\n}"
+    }
+  },
+  "contract": {
+    "input": {
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "title": "USER_ID",
+        "description": "A user ID-based request.",
+        "type": "object",
+        "required": [
+          "USER_ID"
+        ],
+        "properties": {
+          "USER_ID": {
+            "type": "string",
+            "description": "The user ID."
+          }
+        }
+      }
+    },
+    "output": {
+      "successSchema": {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "title": "presenceId",
+        "description": "Returns a user’s presence.",
+        "type": "object",
+        "required": [
+          "presenceId"
+        ],
+        "properties": {
+          "presenceId": {
+            "type": "string",
+            "title": "presenceId",
+            "description": "The user’s presence, which indicates whether the user can be reached."
+          }
+        }
+      }
+    }
+  },
+  "secure": false
+}
