@@ -1,30 +1,33 @@
 {
-  "name": "Get Genesys Cloud User Presence",
+  "name": "GC User Presence Update",
   "integrationType": "purecloud-data-actions",
   "actionType": "custom",
   "config": {
     "request": {
       "requestUrlTemplate": "/api/v2/users/${input.USER_ID}/presences/purecloud",
-      "requestType": "GET",
-      "headers": {},
-      "requestTemplate": "${input.rawRequest}"
+      "requestType": "PATCH",
+      "headers": {
+        "Content-Type": "application/json",
+        "UserAgent": "PureCloudIntegrations/1.0"
+      },
+      "requestTemplate": "{\n  \"presenceDefinition\": {\n    \"id\": \"${input.PRESENCE_DEFINITION_ID}\"\n  },\n  \"primary\": true\n}"
     },
     "response": {
-      "translationMap": {
-        "systemPresence": "$.['presenceDefinition'].systemPresence"
-      },
-      "translationMapDefaults": {
-        "systemPresence": "Not Found"
-      },
-      "successTemplate": "{\"systemPresence\": ${systemPresence}}"
+      "translationMap": {},
+      "translationMapDefaults": {},
+      "successTemplate": "${rawResult}"
     }
   },
   "contract": {
     "input": {
       "inputSchema": {
+        "title": "UserIdRequest",
         "type": "object",
         "properties": {
           "USER_ID": {
+            "type": "string"
+          },
+          "PRESENCE_DEFINITION_ID": {
             "type": "string"
           }
         },
@@ -34,11 +37,7 @@
     "output": {
       "successSchema": {
         "type": "object",
-        "properties": {
-          "systemPresence": {
-            "type": "string"
-          }
-        },
+        "properties": {},
         "additionalProperties": true
       }
     }

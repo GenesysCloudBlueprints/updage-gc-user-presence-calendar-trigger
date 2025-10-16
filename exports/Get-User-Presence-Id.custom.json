@@ -1,5 +1,5 @@
 {
-  "name": "Get User Presence Id - Exported 2025-09-30 @ 16:39",
+  "name": "Get User Presence Id",
   "integrationType": "purecloud-data-actions",
   "actionType": "custom",
   "config": {
