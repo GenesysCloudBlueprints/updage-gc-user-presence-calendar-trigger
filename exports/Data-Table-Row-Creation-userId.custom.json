@@ -1,0 +1,50 @@
+{
+  "name": "Data Table Row Creation (userId)",
+  "integrationType": "purecloud-data-actions",
+  "actionType": "custom",
+  "config": {
+    "request": {
+      "requestUrlTemplate": "/api/v2/flows/datatables/${input.datatableId}/rows",
+      "requestType": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "requestTemplate": "{\n  \"key\": \"${input.userId}\",\n  \"previousPresence\": \"${input.previousPresence}\"\n}"
+    },
+    "response": {
+      "translationMap": {},
+      "translationMapDefaults": {},
+      "successTemplate": "${rawResult}"
+    }
+  },
+  "contract": {
+    "input": {
+      "inputSchema": {
+        "type": "object",
+        "required": [
+          "datatableId",
+          "userId",
+          "previousPresence"
+        ],
+        "properties": {
+          "datatableId": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string"
+          },
+          "previousPresence": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "output": {
+      "successSchema": {
+        "type": "object",
+        "properties": {}
+      }
+    }
+  },
+  "secure": false
+}

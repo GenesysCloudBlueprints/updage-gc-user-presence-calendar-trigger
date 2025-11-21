@@ -1,0 +1,46 @@
+{
+  "name": "Data Table Row Delete (meetingId)",
+  "integrationType": "purecloud-data-actions",
+  "actionType": "custom",
+  "config": {
+    "request": {
+      "requestUrlTemplate": "/api/v2/flows/datatables/${input.datatableId}/rows/${input.meetingId}",
+      "requestType": "DELETE",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "requestTemplate": "{\n  \"key\": \"${input.userId}\",\n  \"previousPresence\": \"${input.previousPresence}\",\n  \"currentPresence\": \"${input.currentPresence}\",\n  \"meetingIds\": \"${input.meetingIds}\",\n  \"updatePresence\": \"${input.updatePresence}\",\n  \"lockingMeetingId\": \"${input.lockingMeetingId}\"\n}"
+    },
+    "response": {
+      "translationMap": {},
+      "translationMapDefaults": {},
+      "successTemplate": "${rawResult}"
+    }
+  },
+  "contract": {
+    "input": {
+      "inputSchema": {
+        "type": "object",
+        "required": [
+          "datatableId",
+          "meetingId"
+        ],
+        "properties": {
+          "datatableId": {
+            "type": "string"
+          },
+          "meetingId": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "output": {
+      "successSchema": {
+        "type": "object",
+        "properties": {}
+      }
+    }
+  },
+  "secure": false
+}

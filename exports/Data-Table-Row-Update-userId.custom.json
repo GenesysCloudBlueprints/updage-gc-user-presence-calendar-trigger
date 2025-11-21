@@ -1,0 +1,56 @@
+{
+  "name": "Data Table Row Update (userId)",
+  "integrationType": "purecloud-data-actions",
+  "actionType": "custom",
+  "config": {
+    "request": {
+      "requestUrlTemplate": "/api/v2/flows/datatables/${input.datatableId}/rows/${input.userId}",
+      "requestType": "PUT",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "requestTemplate": "{\n  \"key\": \"${input.userId}\",\n  \"previousPresence\": \"${input.previousPresence}\",\n  \"meetingIds\": \"${input.meetingIds}\",\n  \"updatePresence\": \"${input.updatePresence}\"\n}"
+    },
+    "response": {
+      "translationMap": {},
+      "translationMapDefaults": {},
+      "successTemplate": "${rawResult}"
+    }
+  },
+  "contract": {
+    "input": {
+      "inputSchema": {
+        "type": "object",
+        "required": [
+          "datatableId",
+          "userId",
+          "previousPresence"
+        ],
+        "properties": {
+          "datatableId": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string"
+          },
+          "previousPresence": {
+            "type": "string"
+          },
+          "meetingIds": {
+            "type": "string"
+          },
+          "updatePresence": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "output": {
+      "successSchema": {
+        "type": "object",
+        "properties": {}
+      }
+    }
+  },
+  "secure": false
+}
