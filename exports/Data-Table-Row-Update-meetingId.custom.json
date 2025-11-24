@@ -1,15 +1,15 @@
 {
-  "name": "Data Table Row Update",
+  "name": "Data Table Row Update (meetingId)",
   "integrationType": "purecloud-data-actions",
   "actionType": "custom",
   "config": {
     "request": {
-      "requestUrlTemplate": "/api/v2/flows/datatables/${input.datatableId}/rows/${input.userId}",
+      "requestUrlTemplate": "/api/v2/flows/datatables/${input.datatableId}/rows/${input.meetingId}",
       "requestType": "PUT",
       "headers": {
         "Content-Type": "application/json"
       },
-      "requestTemplate": "{\n  \"key\": \"${input.userId}\",\n  \"previousPresence\": \"${input.previousPresence}\"\n}"
+      "requestTemplate": "{\n  \"key\": \"${input.meetingId}\",\n  \"TriggerType\": \"${input.TriggerType}\",\n  \"TriggerTime\": \"${input.TriggerTime}\",\n  \"genesysUserId\": \"${input.genesysUserId}\"\n}"
     },
     "response": {
       "translationMap": {},
@@ -23,17 +23,22 @@
         "type": "object",
         "required": [
           "datatableId",
-          "userId",
-          "previousPresence"
+          "meetingId"
         ],
         "properties": {
           "datatableId": {
             "type": "string"
           },
-          "userId": {
+          "TriggerType": {
             "type": "string"
           },
-          "previousPresence": {
+          "TriggerTime": {
+            "type": "string"
+          },
+          "genesysUserId": {
+            "type": "string"
+          },
+          "meetingId": {
             "type": "string"
           }
         }
